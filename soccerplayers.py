@@ -111,18 +111,15 @@ def make_results(df_orig, y_pred, y_true_cols):
     df_res["Main Position"] = df_orig["Position 1"].values
     return df_res
 
-# --- Predykcje ---
 FW_pred = model_FW.predict(X_FW_scaled)
 CM_pred = model_CM.predict(X_CM_scaled)
 CB_pred = model_CB.predict(X_CB_scaled)
 
-# --- Tworzenie ramek wynikowych dla każdej pozycji ---
 df_FW_results = make_results(df_FW, FW_pred, y_train_FW)
 df_CM_results = make_results(df_CM, CM_pred, y_train_CM)
 df_CB_results = make_results(df_CB, CB_pred, y_train_CB)
 
 
-#--- Połączenie wszystkich wyników ---
 df_results_all = pd.concat([df_FW_results, df_CM_results, df_CB_results], ignore_index=True)
 
 
@@ -132,13 +129,12 @@ df_team_stats = df_results_all.groupby("Player Team").agg({
     "Predicted rating": "mean"
 }).reset_index()
 
-# Dodajemy wskaźnik „Team Power”
 df_team_stats['Team Power'] = (
     df_team_stats['Predicted goal'] * 0.6 +
     df_team_stats['Predicted assistTotal'] * 0.4 +
     df_team_stats['Predicted rating'] * 10
 )
-# Sortowanie drużyn według mocy
+
 df_team_stats = df_team_stats.sort_values(by='Team Power', ascending=False).reset_index(drop=True)
 
 
