@@ -120,22 +120,40 @@ df_CM_results = make_results(df_CM, CM_pred, y_train_CM)
 df_CB_results = make_results(df_CB, CB_pred, y_train_CB)
 
 
+df_FW_results['Player Power'] = (
+    df_FW_results['Predicted goal'] * 0.6 +
+    df_FW_results['Predicted assistTotal'] * 0.4 +
+    df_FW_results['Predicted rating'] * 10
+)
+
+df_CM_results['Player Power'] = (
+    df_CM_results['Predicted assistTotal'] * 0.5 +
+    df_CM_results['Predicted keyPassPerGame'] * 0.5 +
+    df_CM_results['Predicted rating'] * 10
+)
+
+df_CB_results['Player Power'] = (
+    df_CB_results['Predicted tacklePerGame'] * 0.4 +
+    df_CB_results['Predicted clearancePerGame'] * 0.6 +
+    df_CB_results['Predicted rating'] * 10
+)
+
 df_results_all = pd.concat([df_FW_results, df_CM_results, df_CB_results], ignore_index=True)
 
 
 df_team_stats = df_results_all.groupby("Player Team").agg({
-    "Predicted goal": "sum",
-    "Predicted assistTotal": "sum",
-    "Predicted rating": "mean"
-}).reset_index()
+    "Player Power": "sum",      
+    "Predicted rating": "mean" 
+    }).reset_index()
 
-df_team_stats['Team Power'] = (
-    df_team_stats['Predicted goal'] * 0.6 +
-    df_team_stats['Predicted assistTotal'] * 0.4 +
-    df_team_stats['Predicted rating'] * 10
-)
 
-df_team_stats = df_team_stats.sort_values(by='Team Power', ascending=False).reset_index(drop=True)
+df_team_stats.rename(columns={
+    "Player Power": "Team Power Sum",
+    "Predicted rating": "Average Rating"
+}, inplace=True)
+
+df_team_stats = df_team_stats.sort_values(by='Team Power Sum', ascending=False).reset_index(drop=True)
+
 
 
 print("=== Statystyki drużynowe (Top 10) ===")
