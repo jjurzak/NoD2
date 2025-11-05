@@ -43,6 +43,13 @@ model_balanced = LogisticRegression(class_weight='balanced')
 model_balanced.fit(X_train,y_train)
 y_pred_bal = model_balanced.predict(X_test)
 
+
+
+print("Model z class_weight='normal")
+print("Acc", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+
+
 print("Model z class_weight='balanced ")
 print("Acc", accuracy_score(y_test, y_pred_bal))
 print(classification_report(y_test, y_pred_bal))
