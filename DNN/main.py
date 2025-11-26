@@ -104,9 +104,9 @@ def run_transformer_weight():
 
 
 if __name__ == '__main__':
-    #run_iris_dense()
+    run_iris_dense()
     print('----------')
-    #run_MNIST_conv2D()
+    run_MNIST_conv2D()
     print("----------")
     run_transformer_weight()
 
