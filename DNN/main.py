@@ -27,10 +27,10 @@ def run_iris_dense():
 
     model.summary()
 
-    history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=50, batch_size=8)
+    model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=100, batch_size=8)
 
     loss, acc = model.evaluate(X_test, y_test)
     print(f"Test loss: {loss:.4f}, Test acc: {acc:.4f}")
 
-if __name__ == '__name__':
+if __name__ == '__main__':
     run_iris_dense()
