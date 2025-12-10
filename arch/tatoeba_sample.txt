@@ -1,0 +1,57 @@
+en	The quick brown fox jumps over the lazy dog.
+en	I am learning how to program neural networks.
+en	The weather is very nice today suitable for a walk.
+en	Where is the nearest library located?
+en	I would like to order a coffee please.
+en	Machine learning is the future of technology.
+en	Python is a great programming language for data science.
+en	Do you speak English fluently?
+en	It is important to sleep eight hours a day.
+en	My favorite color is blue and I like jazz music.
+en	Can you help me find the train station?
+en	Understanding LSTM networks can be challenging but rewarding.
+en	Artificial intelligence is changing the world rapidly.
+en	Please keep off the grass in the park.
+en	This dataset is small but good for testing.
+en	Have a nice day and see you tomorrow.
+en	What time is it now?
+en	I need to buy some groceries for dinner.
+en	She sells sea shells by the sea shore.
+fr	Le renard brun saute par dessus le chien paresseux.
+fr	J'apprends à programmer des réseaux de neurones.
+fr	Il fait très beau aujourd'hui pour se promener.
+fr	Où se trouve la bibliothèque la plus proche ?
+fr	Je voudrais commander un café s'il vous plaît.
+fr	L'apprentissage automatique est l'avenir de la technologie.
+fr	Python est un excellent langage pour la science des données.
+fr	Parlez-vous couramment français ?
+fr	Il est important de dormir huit heures par jour.
+fr	Ma couleur préférée est le bleu et j'aime le jazz.
+fr	Pouvez-vous m'aider à trouver la gare ?
+fr	Comprendre les réseaux LSTM peut être difficile.
+fr	L'intelligence artificielle change le monde rapidement.
+fr	Veuillez ne pas marcher sur l'herbe du parc.
+fr	Cet ensemble de données est petit mais bon pour tester.
+fr	Bonne journée et à demain.
+fr	Quelle heure est-il maintenant ?
+fr	Je dois acheter des courses pour le dîner.
+fr	C'est la vie mon ami.
+de	Der schnelle braune Fuchs springt über den faulen Hund.
+de	Ich lerne, wie man neuronale Netze programmiert.
+de	Das Wetter ist heute sehr schön für einen Spaziergang.
+de	Wo befindet sich die nächste Bibliothek?
+de	Ich möchte bitte einen Kaffee bestellen.
+de	Maschinelles Lernen ist die Zukunft der Technologie.
+de	Python ist eine großartige Sprache für Data Science.
+de	Sprechen Sie fließend Deutsch?
+de	Es ist wichtig, acht Stunden am Tag zu schlafen.
+de	Meine Lieblingsfarbe ist Blau und ich mag Jazzmusik.
+de	Können Sie mir helfen, den Bahnhof zu finden?
+de	Das Verständnis von LSTM-Netzwerken kann schwierig sein.
+de	Künstliche Intelligenz verändert die Welt rasant.
+de	Bitte betreten Sie den Rasen im Park nicht.
+de	Dieser Datensatz ist klein, aber gut zum Testen.
+de	Haben Sie einen schönen Tag und bis morgen.
+de	Wie spät ist es jetzt?
+de	Ich muss Lebensmittel für das Abendessen kaufen.
+de	Fischers Fritz fischt frische Fische.
