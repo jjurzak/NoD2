@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pylab as plt
 from pandas.core.common import random_state
+from pandas.core.dtypes.cast import np_can_cast_scalar
 import tensorflow as tf 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras import layers
@@ -9,7 +10,6 @@ from tensorflow.keras.layers import Dense, LSTM
 from sklearn.preprocessing import MinMaxScaler, scale
 from sklearn.model_selection import train_test_split
 from tensorflow.python.checkpoint.checkpoint import metrics
-from tensorflow.python.eager.context import anonymous_name
 
 
 def generate_forecasting_data(n_samples=1000, freq=0.05, noise=0.1):
@@ -44,9 +44,6 @@ model.summary()
 model.compile(optimizer='adam', loss='mean_squared_error')
 model.fit(X, y, epochs=5, batch_size=1, verbose=1)
 
-
-
-
 predicted = model.predict(X)
 predicted = scaler.inverse_transform(predicted)
 real = scaler.inverse_transform(y.reshape(-1, 1))
@@ -66,9 +63,6 @@ def generate_anomaly_data(n_samples=1000, timesteps=10, anomaly_rate=0.1):
     X[anomalies] += np.random.normal(5, 1, (n_anomalies, timesteps))
     y[anomalies] = 1 
     return X.reshape(n_samples, timesteps, 1), y
-
-
-
 
 X, y = generate_anomaly_data(1000)
 
@@ -92,8 +86,48 @@ model = Sequential([
 model.summary()
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
-model.fit(X_train_scaled, y_train, epochs=25, batch_size=32, validation_data=(X_test_scaled, y_test),verbose=1)
+model.fit(X_train_scaled, y_train, epochs=3, batch_size=32, validation_data=(X_test_scaled, y_test),verbose=1)
 
 loss, accuracy = model.evaluate(X_test, y_test)
 
 print(f'Dokladnosc: {accuracy:.2f}')
+
+def generate_pattern_data(n_classes=3, sample_per_class=500, timesteps=20):
+    X, y = [], []
+    for cls in range(n_classes):
+        for _ in range(sample_per_class):
+            if cls == 0:
+                seq = np.random.normal(0, 0.2, timesteps)
+            elif cls == 1:
+                seq = np.sin(np.linspace(0, 3*np.pi, timesteps)) + np.random.normal(0, 0.1, timesteps)
+            else:
+                seq = np.sin(np.linspace(0,6*np.pi, timesteps)) + np.random.normal(0, 0.2, timesteps)
+
+            X.append(seq)
+            y.append(cls)
+    
+    X = np.array(X).reshape(-1, timesteps, 1)
+    y = np.array(y)
+    y = tf.keras.utils.to_categorical(y, n_classes)
+    return X, y
+
+
+timesteps = 20
+X, y = generate_pattern_data(timesteps=timesteps)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=2137)
+
+model = Sequential([
+    layers.LSTM(100, input_shape=(timesteps, 1)),
+    layers.Dense(3, activation='softmax')
+    ])
+
+model.summary()
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=35, batch_size=32, validation_data=(X_test, y_test))
+
+loss, accuracy = model.evaluate(X_test, y_test)
+print(f'Dokladnosc: {accuracy:.2f}')
+
+
+
